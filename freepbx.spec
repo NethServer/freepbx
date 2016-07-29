@@ -31,6 +31,8 @@ Requires:	sox, radiusclient-ng
 # This is to make sure postfix can talk to TLS endpoints
 Requires:	 cyrus-sasl-plain
 
+Requires:	 nethserver-mysql
+
 #Requires:	libicu-devel
 
 Provides:	perl(retrieve_parse_amportal_conf.pl)
@@ -60,7 +62,6 @@ if [ $1 == 1 ]; then
 	# Note that the Sangoma httpd rpm explicitly starts as the correct user.
 	# This is OK in the chroot
 	systemctl start asterisk
-
 fi
 
 %post
@@ -84,17 +85,6 @@ if [ $1 == 1 ]; then
 	cd /usr/src/%{name}-%{version}
 	./start_asterisk start &>> /var/log/freepbx_rpm_install.log
 
-	# We also need to ensure that the database is up
-	# This errors if it's run in the chroot
-	CHROOT=`systemctl start mariadb 2>&1 | grep chroot`
-	if [ "$CHROOT" != "" ]; then
-		echo "Chroot detected, trying to start manually... " >> /var/log/freepbx_rpm_install.log
-		# We errored, maria isn't started. Start it manually.
-		chown -R mysql /var/lib/mysql
-		/usr/bin/mysql_install_db --user=mysql &>> /var/log/freepbx_rpm_install.log
-		nohup /usr/bin/mysqld_safe --basedir=/usr &>> /var/log/freepbx_rpm_install.log &
-	fi
-
 	# Make sure that the default mysql socket exists, and if it doesn't,
 	# wait for it.
 	while [ ! -e /var/lib/mysql/mysql.sock ]; do
@@ -106,7 +96,7 @@ if [ $1 == 1 ]; then
 
 	mkdir -p /var/lib/asterisk/sounds/custom/
 
-	./install -n &>> /var/log/freepbx_rpm_install.log
+	/usr/bin/scl enable rh-php56 "./install --dbuser root --dbpass $(grep 'password=' /root/.my.cnf | cut -d= -f2) --webroot /var/www/html/freepbx -n" &>> /var/log/freepbx_rpm_install.log
 
 	touch /var/log/asterisk/fail2ban
 	touch /var/log/asterisk/freepbx_security.log
