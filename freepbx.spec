@@ -50,97 +50,19 @@ rm -rf %{buildroot}
 %build
 
 %install
-%{__install} -d %{buildroot}/usr/src/%{name}-%{version}
-cp -r * %{buildroot}/usr/src/%{name}-%{version}
+%{__install} -d %{buildroot}/usr/src/%{name}
+cp -r * %{buildroot}/usr/src/%{name}
 mkdir -p %{buildroot}/etc/httpd/conf.d
 mkdir -p %{buildroot}/lib/systemd/system
 cp %{SOURCE1} %{buildroot}/lib/systemd/system
 
 %pre
-#only do on a new install
-if [ $1 == 1 ]; then
-	# Note that the Sangoma httpd rpm explicitly starts as the correct user.
-	# This is OK in the chroot
-	systemctl start asterisk
-fi
 
 %post
-
-# Before we do anything, make sure we can write to the logfile
-mkdir -p /var/log/asterisk
-chown -R asterisk.asterisk /var/log/asterisk
-
-#only do on a new install
-if [ $1 == 1 ]; then
-
-	mv -f /usr/src/%{name} /usr/src/%{name}.RPMSAVE
-	ln -s /usr/src/%{name}-%{version} /usr/src/%{name}
-
-	mkdir -p /etc/asterisk
-
-	#new install call install
-	echo " *** Installing FreePBX"
-	echo " *** Installing FreePBX" >> /var/log/freepbx_rpm_install.log
-	date >> /var/log/freepbx_rpm_install.log
-	cd /usr/src/%{name}-%{version}
-	./start_asterisk start &>> /var/log/freepbx_rpm_install.log
-
-	# Make sure that the default mysql socket exists, and if it doesn't,
-	# wait for it.
-	while [ ! -e /var/lib/mysql/mysql.sock ]; do
-		echo `date` "Socket file doesn't exists, waiting for it" &>> /var/lib/freepbx_rpm_install.log
-		sleep 1
-	done
-
-	chmod 777 /var/log/asterisk/freepbx.log
-
-	mkdir -p /var/lib/asterisk/sounds/custom/
-
-	/usr/bin/scl enable rh-php56 "./install --dbuser root --dbpass $(grep 'password=' /root/.my.cnf | cut -d= -f2) --webroot /var/www/html/freepbx -n" &>> /var/log/freepbx_rpm_install.log
-
-	touch /var/log/asterisk/fail2ban
-	touch /var/log/asterisk/freepbx_security.log
-	touch /var/log/asterisk/cdr-csv/Master.csv
-	chmod 777  /var/log/asterisk/cdr-csv/Master.csv
-	chmod 755 /var/spool/asterisk/monitor
-	/usr/sbin/fwconsole chown &>> /var/log/freepbx_rpm_install.log
-	/usr/sbin/fwconsole r &>> /var/log/freepbx_rpm_install.log
-
-	# Update php's max file size
-	sed -i 's/\(^upload_max_filesize = \).*/\1256M/' /etc/php.ini
-
-	echo " *** FreePBX installed!" &>> /var/log/freepbx_rpm_install.log
-
-	mysql -N --batch asterisk -e 'select `data` from `module_xml` where `id`="randomid"' > /etc/asterisk/freepbx-id
-
-	# We shutdown mysql here, in case we're still in the chroot.
-	# If we're not in the chroot, we start it immediately after.
-	/bin/mysqladmin shutdown
-
-else
-	echo "FreePBX has not been upgraded. Please upgrade FreePBX through Module Admin."
-fi
-
-# Always make sure that our required services are started and set to start automatically
-for S in mariadb httpd dnsmasq freepbx; do
-	systemctl enable $S &>> /var/log/freepbx_rpm_install.log || :
-	systemctl start $S &>> /var/log/freepbx_rpm_install.log  || :
-done
-
-# Final file permissions cleanup
-mkdir -p /var/log/pbx/install
-mkdir -p /var/log/pbx/upgrade
-
-echo "Final Chown start..." >> /var/log/freepbx_rpm_install.log
-chown -R asterisk.asterisk /var/run/asterisk /var/log/pbx /var/lib/asterisk/sounds /etc/asterisk
-chmod -R 755 /etc/asterisk
-chmod 750 /etc/asterisk/keys
-echo "Complete! RPM Successfully installed." >> /var/log/freepbx_rpm_install.log
-date &>> /var/log/freepbx_rpm_install.log
 
 %clean
 rm -rf %{buildroot}
 
 %files
-/usr/src/%{name}-%{version}/*
+/usr/src/%{name}/*
 /lib/systemd/system/freepbx.service
