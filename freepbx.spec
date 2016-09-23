@@ -8,7 +8,6 @@ License:    	GPL
 Group:		System/Servers
 Source0:	http://mirror.freepbx.org/modules/packages/freepbx/%{name}-%{version}-latest.tgz
 Source1:	freepbx.service
-Patch0:  	allow-php-5.6.5.patch
 Patch1:  	fix-utility-errors.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildArch: 	noarch
@@ -46,7 +45,6 @@ FreePBX is a GUI that gives you the ability to manage your Asterisk system.
 rm -rf %{buildroot}
 
 %setup -q -n %{name}
-%patch0 -p1
 %patch1 -p1
 
 %build
