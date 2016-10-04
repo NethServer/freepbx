@@ -14,7 +14,7 @@ AutoReq:	no
 Packager: 	Nethesis
 URL:		http://www.freepbx.org/
 
-Requires:	asterisk-core, kmod-dahdi-linux, dahdi-linux, dahdi-tools, dahdi-firmware, wanpipe, asterisk-addons-mysql, asterisk-speex asterisk-voicemail-odbcstorage asterisk-resample
+Requires:	asterisk-core, kmod-dahdi-linux, dahdi-linux, dahdi-tools, dahdi-firmware, wanpipe, asterisk-addons-mysql, asterisk-speex, asterisk-voicemail-odbcstorage, asterisk-resample
 Requires:	httpd, mariadb, mariadb-server
 
 Requires:   rh-php56, rh-php56-php-fpm
@@ -29,8 +29,6 @@ Requires:	sox, radiusclient-ng
 
 # This is to make sure postfix can talk to TLS endpoints
 Requires:	cyrus-sasl-plain
-
-Requires:	nethserver-mysql
 
 #Requires:	libicu-devel
 
