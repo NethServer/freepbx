@@ -14,7 +14,7 @@ AutoReq:	no
 Packager: 	Nethesis
 URL:		http://www.freepbx.org/
 
-Requires:	asterisk-core, kmod-dahdi-linux, dahdi-linux, dahdi-tools, dahdi-firmware, asterisk-addons-mysql, asterisk-speex, asterisk-voicemail-odbcstorage, asterisk-resample
+Requires:	asterisk-core, kmod-dahdi-linux, dahdi-linux, dahdi-tools, dahdi-firmware, asterisk-addons-mysql, asterisk-speex, asterisk-voicemail-odbcstorage, asterisk-resample, asterisk-odbc
 Requires:	httpd, mariadb, mariadb-server
 
 Requires:   rh-php56, rh-php56-php-fpm
