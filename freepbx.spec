@@ -3,7 +3,7 @@
 Summary:	Asterisk FreePBX Web Interface
 Name:		freepbx
 Version:	14.0
-Release:    	2%{dist}
+Release:    	3%{dist}
 License:    	GPL
 Group:		System/Servers
 Source0:	http://mirror.freepbx.org/modules/packages/freepbx/%{name}-%{version}-latest.tgz
@@ -26,7 +26,7 @@ Requires:   rh-php56-php-intl, rh-php56-php-ldap, rh-php56-php-odbc, rh-php56-ph
 
 # Various packages required for FreePBX
 Requires:	sudo, nodejs, icu,  net-tools, postfix, rsync, ghostscript, libtiff, unixODBC, mysql-connector-odbc
-Requires:	libwat, libpri, libtonezone, libresample, libss7, libopenr2, icu, libicu-devel, tftp-server, whois, dos2unix
+Requires:	libpri, libtonezone, libresample, libss7, libopenr2, icu, libicu-devel, tftp-server, whois, dos2unix
 Requires:	sox, radiusclient-ng
 
 # This is to make sure postfix can talk to TLS endpoints
