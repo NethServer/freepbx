@@ -3,7 +3,7 @@
 Summary:	Asterisk FreePBX Web Interface
 Name:		freepbx
 Version:	14.0
-Release:    	6%{dist}
+Release:    	7%{dist}
 License:    	GPL
 Group:		System/Servers
 Source0:	http://mirror.freepbx.org/modules/packages/freepbx/%{name}-%{version}-latest.tgz
