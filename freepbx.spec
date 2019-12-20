@@ -8,6 +8,7 @@ License:    	GPL
 Group:		System/Servers
 Source0:	http://mirror.freepbx.org/modules/packages/freepbx/%{name}-%{version}-latest.tgz
 Source1:	freepbx.service
+Source2:	music.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildArch: 	noarch
 AutoReq:	no
@@ -53,6 +54,8 @@ cp -r * %{buildroot}/usr/src/%{name}
 mkdir -p %{buildroot}/etc/httpd/conf.d
 mkdir -p %{buildroot}/lib/systemd/system
 cp %{SOURCE1} %{buildroot}/lib/systemd/system
+mkdir -p %{buildroot}/usr/src/%{name}/amp_conf/moh
+tar xzpf %{SOURCE2} -C %{buildroot}/usr/src/%{name}/amp_conf/moh
 
 %pre
 
