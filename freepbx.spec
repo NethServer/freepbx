@@ -9,6 +9,7 @@ Group:		System/Servers
 Source0:	freepbx-14.0.13.12.tgz
 Source1:	freepbx.service
 Source2:	music.tar.gz
+Source3:	dahdi-blacklist.conf
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildArch: 	noarch
 AutoReq:	no
@@ -59,6 +60,8 @@ mkdir -p %{buildroot}/lib/systemd/system
 cp %{SOURCE1} %{buildroot}/lib/systemd/system
 mkdir -p %{buildroot}/usr/src/%{name}/amp_conf/moh
 tar xzpf %{SOURCE2} -C %{buildroot}/usr/src/%{name}/amp_conf/moh
+mkdir -p %{buildroot}/etc/modprobe.d
+cp %{SOURCE3} %{buildroot}/etc/modprobe.d/dahdi-blacklist.conf
 
 %pre
 
@@ -68,5 +71,6 @@ tar xzpf %{SOURCE2} -C %{buildroot}/usr/src/%{name}/amp_conf/moh
 rm -rf %{buildroot}
 
 %files
+/etc/modprobe.d/dahdi-blacklist.conf
 /usr/src/%{name}/*
 /lib/systemd/system/freepbx.service
