@@ -6,7 +6,7 @@ Version:	14.0
 Release:	8%{dist}
 License:    	GPL
 Group:		System/Servers
-Source0:	http://mirror.freepbx.org/modules/packages/freepbx/%{name}-%{version}-latest.tgz
+Source0:	freepbx-14.0.13.12.tgz
 Source1:	freepbx.service
 Source2:	music.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}
@@ -20,6 +20,9 @@ Requires:	asterisk-sounds-extra-en-ulaw
 Requires:	kmod-dahdi-linux, dahdi-linux, dahdi-tools, dahdi-firmware
 Requires:	httpd, mariadb, mariadb-server
 
+Requires:   dahdi-tools-libs >= 2.11.1-16
+Obsoletes:  libtonezone
+
 Requires:   rh-php56, rh-php56-php-fpm
 Requires:   rh-php56-php-mysql, rh-php56-php-pear, rh-php56-php-pdo
 Requires:   rh-php56-php-process, rh-php56-php-xml, rh-php56-php-mbstring
@@ -27,7 +30,7 @@ Requires:   rh-php56-php-intl, rh-php56-php-ldap, rh-php56-php-odbc, rh-php56-ph
 
 # Various packages required for FreePBX
 Requires:	sudo, nodejs, icu,  net-tools, postfix, rsync, ghostscript, libtiff, unixODBC, mysql-connector-odbc
-Requires:	libpri, libtonezone, libresample, libss7, libopenr2, icu, libicu-devel, tftp-server, whois, dos2unix
+Requires:	libpri, libresample, libss7, libopenr2, icu, libicu-devel, tftp-server, whois, dos2unix
 Requires:	sox, radiusclient-ng, mpg123
 
 # This is to make sure postfix can talk to TLS endpoints
