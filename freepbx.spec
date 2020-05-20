@@ -6,7 +6,7 @@ Version:	14.0
 Release:	8%{dist}
 License:    	GPL
 Group:		System/Servers
-Source0:	freepbx-14.0.13.12.tgz
+Source0:	https://github.com/NethServer/freepbx/releases/download/14.0r8/freepbx-14.0.13.12.tgz
 Source1:	freepbx.service
 Source2:	music.tar.gz
 Source3:	dahdi-blacklist.conf
