@@ -74,3 +74,5 @@ rm -rf %{buildroot}
 /etc/modprobe.d/dahdi-blacklist.conf
 /usr/src/%{name}/*
 /lib/systemd/system/freepbx.service
+
+%changelog
