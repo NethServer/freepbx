@@ -3,7 +3,7 @@
 Summary:	Asterisk FreePBX Web Interface
 Name:		freepbx
 Version: 14.0
-Release: 9%{?dist}
+Release: 10%{?dist}
 License:    	GPL
 Group:		System/Servers
 Source0:	https://github.com/NethServer/freepbx/releases/download/14.0r8/freepbx-14.0.13.12.tgz
@@ -75,6 +75,9 @@ rm -rf %{buildroot}
 /lib/systemd/system/freepbx.service
 
 %changelog
+* Fri May 22 2020 Stefano Fancello <stefano.fancello@nethesis.it> - 14.0-10
+- Remove libtonezone obsoletes. It is now removed by dahdi-tools - Bug NethServer/dev#6172
+
 * Thu May 21 2020 Stefano Fancello <stefano.fancello@nethesis.it> - 14.0-9
 - Use dahdi-tools from EPEL and remove libtonezone package - Bug NethServer/dev#6172
 
