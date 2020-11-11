@@ -18,10 +18,7 @@ URL:		http://www.freepbx.org/
 
 Requires:	asterisk13-core, asterisk13-addons-mysql, asterisk13-speex, asterisk13-voicemail-odbcstorage, asterisk13-resample, asterisk13-odbc
 Requires:	asterisk-sounds-extra-en-ulaw
-Requires:	kmod-dahdi-linux, dahdi-linux, dahdi-firmware
 Requires:	httpd, mariadb, mariadb-server
-
-Requires:   dahdi-tools >= 2.11.1-16
 
 Requires:   rh-php56, rh-php56-php-fpm
 Requires:   rh-php56-php-mysql, rh-php56-php-pear, rh-php56-php-pdo
