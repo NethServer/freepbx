@@ -27,7 +27,7 @@ Requires:   rh-php56-php-intl, rh-php56-php-ldap, rh-php56-php-odbc, rh-php56-ph
 
 # Various packages required for FreePBX
 Requires:	sudo, nodejs, icu,  net-tools, postfix, rsync, ghostscript, libtiff, unixODBC, mysql-connector-odbc
-Requires:	libpri, libresample, libss7, libopenr2, icu, libicu-devel, tftp-server, whois, dos2unix
+Requires:	libpri, libresample, libss7, icu, libicu-devel, tftp-server, whois, dos2unix
 Requires:	sox, radiusclient-ng, mpg123
 
 # This is to make sure postfix can talk to TLS endpoints
