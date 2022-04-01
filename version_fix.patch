@@ -1,0 +1,24 @@
+diff -Naur a/amp_conf/bin/retrieve_conf b/amp_conf/bin/retrieve_conf
+--- a/amp_conf/bin/retrieve_conf	2022-04-01 16:39:04.957894226 +0200
++++ b/amp_conf/bin/retrieve_conf	2022-04-01 16:42:44.281584637 +0200
+@@ -595,7 +595,7 @@
+ // was setting these variables before, assume we still need them
+ $engine = $engineinfo['engine'];
+ $version = $engineinfo['version'];
+-if (version_compare($version, "11", "lt") || version_compare($version, "17", "ge")) {
++if (version_compare($version, "11", "lt") || version_compare($version, "19", "ge")) {
+ 	fatal(_("Running an unsupported version of Asterisk. Supported Asterisk versions: 11, 13, 14, 15, 16. Detected Asterisk version: ".$version));
+ }
+ $chan_dahdi = ast_with_dahdi();
+diff -Naur a/installlib/installcommand.class.php b/installlib/installcommand.class.php
+--- a/installlib/installcommand.class.php	2022-04-01 16:39:12.374883757 +0200
++++ b/installlib/installcommand.class.php	2022-04-01 16:42:45.030583580 +0200
+@@ -286,7 +286,7 @@
+ 			// Parse Asterisk version.
+ 			if (preg_match('/^Asterisk (?:SVN-|GIT-)?(?:branch-)?(\d+(\.\d+)*)(-?(.*)) built/', $astver, $matches)) {
+ 				$determined = true;
+-				if (version_compare($matches[1], "11", "lt") || version_compare($matches[1], "17", "ge")) {
++				if (version_compare($matches[1], "11", "lt") || version_compare($matches[1], "19", "ge")) {
+ 					$output->writeln("<error>Error!</error>");
+ 					$output->writeln("<error>Unsupported Version of ". $matches[1]."</error>");
+ 					$output->writeln("<error>Supported Asterisk versions: 11, 12, 13, 14, 15</error>");
