@@ -10,6 +10,9 @@ Source0:	https://github.com/NethServer/freepbx/releases/download/14.0r8/freepbx-
 Source1:	freepbx.service
 Source2:	music.tar.gz
 Source3:	dahdi-blacklist.conf
+
+Patch0: 	version_fix.patch
+
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildArch: 	noarch
 AutoReq:	no
@@ -45,6 +48,8 @@ FreePBX is a GUI that gives you the ability to manage your Asterisk system.
 rm -rf %{buildroot}
 
 %setup -q -n %{name}
+
+%patch0 -p1
 
 %build
 
