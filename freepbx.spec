@@ -3,7 +3,7 @@
 Summary:	Asterisk FreePBX Web Interface
 Name:		freepbx
 Version: 14.0
-Release: 11%{?dist}
+Release: 12%{?dist}
 License:    	GPL
 Group:		System/Servers
 Source0:	https://github.com/NethServer/freepbx/releases/download/14.0r8/freepbx-14.0.13.12.tgz
@@ -77,6 +77,9 @@ rm -rf %{buildroot}
 /lib/systemd/system/freepbx.service
 
 %changelog
+* Thu May 26 2022 Stefano Fancello <stefano.fancello@nethesis.it> - 14.0r12-1
+- Add patch to allow installation with Asterisk 18 - nethesis/dev#6124
+
 * Tue Nov 17 2020 Giacomo Sanchietti <giacomo.sanchietti@nethesis.it> - 14.0-11
 - Remove dahdi dependency from FreePBX package - NethServer/dev#6319
 
