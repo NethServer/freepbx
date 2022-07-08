@@ -12,6 +12,7 @@ Source2:	music.tar.gz
 Source3:	dahdi-blacklist.conf
 
 Patch0: 	version_fix.patch
+Patch1: 	restore_data.patch
 
 BuildRoot:	%{_tmppath}/%{name}-%{version}
 BuildArch: 	noarch
@@ -50,6 +51,7 @@ rm -rf %{buildroot}
 %setup -q -n %{name}
 
 %patch0 -p1
+%patch1 -p1
 
 %build
 

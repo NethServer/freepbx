@@ -1,0 +1,12 @@
+diff -Naur a/amp_conf/htdocs/admin/modules/sipsettings/install.php b/amp_conf/htdocs/admin/modules/sipsettings/install.php
+--- a/amp_conf/htdocs/admin/modules/sipsettings/install.php	2019-09-26 06:45:39.000000000 +0200
++++ b/amp_conf/htdocs/admin/modules/sipsettings/install.php	2022-07-08 18:07:07.580972264 +0200
+@@ -112,8 +112,6 @@
+ } else {
+ 	out(_("already exists"));
+ }
+-//let update the kvstore
+-sql("UPDATE kvstore_Sipsettings SET type='json-arr' WHERE `key` ='pjsip_identifers_order'");
+ //OK let's do some migrating for BMO
+ $ss = FreePBX::Sipsettings();
+ if(!$ss->getConfig('rtpstart') || !$ss->getConfig('rtpend')) {
